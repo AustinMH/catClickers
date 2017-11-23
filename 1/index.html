@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cat Clicker</title>
+    
+    <style>
+        .wrapper {
+            display: block;
+            margin: 0 auto;
+            max-width: 60%;
+        }
+        img {
+            display: block;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        #clickTarget:hover {
+            cursor: pointer;
+        }
+        #hoverIndicator {
+            margin-top: 10px;
+            padding: 10px;
+        }
+        #clickTarget2:hover {
+            cursor: pointer;
+        }
+        #hoverIndicator2 {
+            margin-top: 10px;
+            padding: 10px;
+        }
+        .col-6 {
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="col-6" id="clickTarget">
+            <h1>Bean</h1>
+            <img src="bean.jpg">
+            <div id="hoverIndicator">
+                <h2>Count</h2>
+                <a id="countContent">0</a>
+            </div>
+        </div>
+        <div class="col-6" id="clickTarget2">
+            <h1>Trickle</h1>
+            <img src="trickle.jpg">
+            <div id="hoverIndicator2">
+                <h2>Count</h2>
+                <a id="countContent2">0</a>
+            </div>
+        </div>
+        </div>
+    
+    <script>
+        
+        var countContent = document.getElementById('countContent');
+        var clickTarget = document.getElementById('clickTarget');
+        var hoverIndicator = document.getElementById('hoverIndicator');
+        var countValue = 0;
+        
+        var countContent2 = document.getElementById('countContent2');
+        var clickTarget2 = document.getElementById('clickTarget2');
+        var hoverIndicator2 = document.getElementById('hoverIndicator2');
+        var countValue2 = 0;
+        
+
+        clickTarget.addEventListener("mouseover", function toggleColorOn() {
+            hoverIndicator.style.backgroundColor = "lightcoral";
+        }, false);
+        
+        clickTarget.addEventListener("mouseout", function toggleColorOff() {
+            hoverIndicator.style.backgroundColor = "";
+        }, false);
+
+        clickTarget.addEventListener('click', function count(){
+            countValue+= 1;
+            countContent.innerHTML = countValue;
+        }, false);
+        
+        clickTarget2.addEventListener("mouseover", function toggleColorOn() {
+            hoverIndicator2.style.backgroundColor = "lightcoral";
+        }, false);
+        
+        clickTarget2.addEventListener("mouseout", function toggleColorOff() {
+            hoverIndicator2.style.backgroundColor = "";
+        }, false);
+
+        clickTarget2.addEventListener('click', function count(){
+            countValue2+= 1;
+            countContent2.innerHTML = countValue2;
+        }, false);
+
+    </script>
+    
+</body>
+</html>

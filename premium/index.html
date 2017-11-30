@@ -1,61 +1,290 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <title>Cat Clicker Premium</title>
-    
-    <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    
+    <title>Cat Clicker</title>
+
     <style>
+        .wrapper {
+            display: block;
+            margin: 0 auto;
+            max-width: 60%;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .catlist {
+            margin: 0 auto;
+        }
+
+        .catList li {
+            display: inline;
+            margin: 0px 20px 0px 20px;
+            text-align: center;
+        }
+
+        .catList li:hover {
+            cursor: pointer;
+            color: #b2b2b2;
+        }
+
+        #clickTarget {
+            display: none;
+        }
+
+        #clickTarget2 {
+            display: none;
+        }
+
+        #clickTarget3 {
+            display: none;
+        }
+
+        #clickTarget4 {
+            display: none;
+        }
+
+        #clickTarget5 {
+            display: none;
+        }
+
+        #clickTarget:hover {
+            cursor: pointer;
+        }
+
+        #hoverIndicator {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        #clickTarget2:hover {
+            cursor: pointer;
+        }
+
+        #hoverIndicator2 {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        #clickTarget3:hover {
+            cursor: pointer;
+        }
+
+        #hoverIndicator3 {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        #clickTarget4:hover {
+            cursor: pointer;
+        }
+
+        #hoverIndicator4 {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        #clickTarget5:hover {
+            cursor: pointer;
+        }
+
+        #hoverIndicator5 {
+            margin-top: 10px;
+            padding: 10px;
+        }
 
     </style>
 </head>
-<body>
 
-    <div id="main" class="container">
-        <div class="row">
-            <div id="listOfCats" class="col-xs-3">
+<body>
+    <div class="wrapper">
+        <ul class="catList">
+            <li id="showTarget">Bean</li>
+            <li id="showTarget2">Cumulus</li>
+            <li id="showTarget3">Ringlet</li>
+            <li id="showTarget4">Nunchuk</li>
+            <li id="showTarget5">Trickle</li>
+        </ul>
+        <div id="clickTarget">
+            <h1>Bean</h1>
+            <img src="bean.jpg">
+            <div id="hoverIndicator">
+                <h2>Count</h2>
+                <a id="countContent">0</a>
             </div>
-            <div id="catDisplayArea" class="col-xs-9">
+        </div>
+        <div id="clickTarget2">
+            <h1>Cumulus</h1>
+            <img src="cumulus.jpg">
+            <div id="hoverIndicator2">
+                <h2>Count</h2>
+                <a id="countContent2">0</a>
+            </div>
+        </div>
+        <div id="clickTarget3">
+            <h1>Ringlet</h1>
+            <img src="ringlet.jpg">
+            <div id="hoverIndicator3">
+                <h2>Count</h2>
+                <a id="countContent3">0</a>
+            </div>
+        </div>
+        <div id="clickTarget4">
+            <h1>Nunchuk</h1>
+            <img src="nunchuk.jpg">
+            <div id="hoverIndicator4">
+                <h2>Count</h2>
+                <a id="countContent4">0</a>
+            </div>
+        </div>
+        <div id="clickTarget5">
+            <h1>Trickle</h1>
+            <img src="trickle.jpg">
+            <div id="hoverIndicator5">
+                <h2>Count</h2>
+                <a id="countContent5">0</a>
             </div>
         </div>
     </div>
 
-    
     <script>
-    
-        var cats = [
-            {
-                "name": "Bean",
-                "img": "bean.jpg",
-                "clicks" : 0
-            },
-            {
-                "name": "Cumulus",
-                "img": "cumulus.jpg",
-                "clicks" : 0
-            },
-            {
-                "name": "Nunchuk",
-                "img": "nunchuk.jpg",
-                "clicks" : 0
-            },
-            {
-                "name": "Ringlet",
-                "img": "ringlet.jpg",
-                "clicks" : 0
-            },
-            {
-                "name": "Trickle",
-                "img": "trickle.jpg",
-                "clicks" : 0
-            },
-        ];
-        
+        var countContent = document.getElementById('countContent');
+        var clickTarget = document.getElementById('clickTarget');
+        var hoverIndicator = document.getElementById('hoverIndicator');
+        var countValue = 0;
+
+        var countContent2 = document.getElementById('countContent2');
+        var clickTarget2 = document.getElementById('clickTarget2');
+        var hoverIndicator2 = document.getElementById('hoverIndicator2');
+        var countValue2 = 0;
+
+        var countContent3 = document.getElementById('countContent3');
+        var clickTarget3 = document.getElementById('clickTarget3');
+        var hoverIndicator3 = document.getElementById('hoverIndicator3');
+        var countValue3 = 0;
+
+        var countContent4 = document.getElementById('countContent4');
+        var clickTarget4 = document.getElementById('clickTarget4');
+        var hoverIndicator4 = document.getElementById('hoverIndicator4');
+        var countValue4 = 0;
+
+        var countContent5 = document.getElementById('countContent5');
+        var clickTarget5 = document.getElementById('clickTarget5');
+        var hoverIndicator5 = document.getElementById('hoverIndicator5');
+        var countValue5 = 0;
+
+        showTarget.addEventListener('click', function showAndHide() {
+            clickTarget.style.display = "block";
+            clickTarget2.style.display = "none";
+            clickTarget3.style.display = "none";
+            clickTarget4.style.display = "none";
+            clickTarget5.style.display = "none";
+        }, false);
+
+        showTarget2.addEventListener('click', function showAndHide() {
+            clickTarget.style.display = "none";
+            clickTarget2.style.display = "block";
+            clickTarget3.style.display = "none";
+            clickTarget4.style.display = "none";
+            clickTarget5.style.display = "none";
+        }, false);
+
+        showTarget3.addEventListener('click', function showAndHide() {
+            clickTarget.style.display = "none";
+            clickTarget2.style.display = "none";
+            clickTarget3.style.display = "block";
+            clickTarget4.style.display = "none";
+            clickTarget5.style.display = "none";
+        }, false);
+
+        showTarget4.addEventListener('click', function showAndHide() {
+            clickTarget.style.display = "none";
+            clickTarget2.style.display = "none";
+            clickTarget3.style.display = "none";
+            clickTarget4.style.display = "block";
+            clickTarget5.style.display = "none";
+        }, false);
+
+        showTarget5.addEventListener('click', function showAndHide() {
+            clickTarget.style.display = "none";
+            clickTarget2.style.display = "none";
+            clickTarget3.style.display = "none";
+            clickTarget4.style.display = "none";
+            clickTarget5.style.display = "block";
+        }, false);
+
+        clickTarget.addEventListener("mouseover", function toggleColorOn() {
+            hoverIndicator.style.backgroundColor = "lightcoral";
+        }, false);
+
+        clickTarget.addEventListener("mouseout", function toggleColorOff() {
+            hoverIndicator.style.backgroundColor = "";
+        }, false);
+
+        clickTarget.addEventListener('click', function count() {
+            countValue += 1;
+            countContent.innerHTML = countValue;
+        }, false);
+
+        clickTarget2.addEventListener("mouseover", function toggleColorOn() {
+            hoverIndicator2.style.backgroundColor = "lightcoral";
+        }, false);
+
+        clickTarget2.addEventListener("mouseout", function toggleColorOff() {
+            hoverIndicator2.style.backgroundColor = "";
+        }, false);
+
+        clickTarget2.addEventListener('click', function count() {
+            countValue2 += 1;
+            countContent2.innerHTML = countValue2;
+        }, false);
+
+        clickTarget3.addEventListener("mouseover", function toggleColorOn() {
+            hoverIndicator3.style.backgroundColor = "lightcoral";
+        }, false);
+
+        clickTarget3.addEventListener("mouseout", function toggleColorOff() {
+            hoverIndicator3.style.backgroundColor = "";
+        }, false);
+
+        clickTarget3.addEventListener('click', function count() {
+            countValue3 += 1;
+            countContent3.innerHTML = countValue3;
+        }, false);
+
+        clickTarget4.addEventListener("mouseover", function toggleColorOn() {
+            hoverIndicator4.style.backgroundColor = "lightcoral";
+        }, false);
+
+        clickTarget4.addEventListener("mouseout", function toggleColorOff() {
+            hoverIndicator4.style.backgroundColor = "";
+        }, false);
+
+        clickTarget4.addEventListener('click', function count() {
+            countValue4 += 1;
+            countContent4.innerHTML = countValue4;
+        }, false);
+
+        clickTarget5.addEventListener("mouseover", function toggleColorOn() {
+            hoverIndicator5.style.backgroundColor = "lightcoral";
+        }, false);
+
+        clickTarget5.addEventListener("mouseout", function toggleColorOff() {
+            hoverIndicator5.style.backgroundColor = "";
+        }, false);
+
+        clickTarget5.addEventListener('click', function count() {
+            countValue5 += 1;
+            countContent5.innerHTML = countValue5;
+        }, false);
+
     </script>
+
 </body>
+
 </html>

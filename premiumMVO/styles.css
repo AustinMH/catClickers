@@ -1,0 +1,94 @@
+
+        .wrapper {
+            display: block;
+            margin: 0 auto;
+            max-width: 60%;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .catlist {
+            margin: 0 auto;
+        }
+
+        .catList li {
+            display: inline;
+            margin: 0px 20px 0px 20px;
+            text-align: center;
+        }
+
+        .catList li:hover {
+            cursor: pointer;
+            color: #b2b2b2;
+        }
+
+        #clickTarget {
+            display: none;
+        }
+
+        #clickTarget2 {
+            display: none;
+        }
+
+        #clickTarget3 {
+            display: none;
+        }
+
+        #clickTarget4 {
+            display: none;
+        }
+
+        #clickTarget5 {
+            display: none;
+        }
+
+        #clickTarget:hover {
+            cursor: pointer;
+        }
+
+        #hoverIndicator {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        #clickTarget2:hover {
+            cursor: pointer;
+        }
+
+        #hoverIndicator2 {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        #clickTarget3:hover {
+            cursor: pointer;
+        }
+
+        #hoverIndicator3 {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        #clickTarget4:hover {
+            cursor: pointer;
+        }
+
+        #hoverIndicator4 {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        #clickTarget5:hover {
+            cursor: pointer;
+        }
+
+        #hoverIndicator5 {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+    

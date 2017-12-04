@@ -31,6 +31,7 @@ var model = {
     ]
 };
 
+
 //Controller
 
 var controller = {
@@ -50,12 +51,23 @@ var controller = {
         return model.cats;
     },
 
-    assignClickedCat: function(catCopy) {
+    //assign directly instead, so the models stay bound
+    /*assignClickedCat: function(catCopy) {
+        
         clickedCat = catCopy;
-    },
+    },*/
     
     incrementCounter: function () {
         console.log("increment counter");
+        clickedCat.clickCount++;
+    },
+
+    loadCat: function(index){
+        var tempCat=model.cats[index];
+        model.cats[index].clickCount+=1;
+        clickedCat=tempCat;
+        console.log(clickedCat.name+" is the clickedCat with count ("+clickedCat.clickCount+")");
+        createCatEntry.init();
     }
 };
 
@@ -65,7 +77,6 @@ var controller = {
 
 var populateList = {
     init: function () {
-        console.log("populateList.init();");
         this.render();
     },
 
@@ -75,23 +86,27 @@ var populateList = {
         var li = "";
         var ul = document.getElementById("catUL");
         var allCats = controller.getAllCats();
-        console.log(allCats);
 
         for (i = 0; i < allCats.length; i++) {
             cat = allCats[i];
             li = document.createElement("li");
             li.textContent = cat.name;
             li.id = cat.name;
+            var eventHandler = document.createAttribute("onClick");
+            eventHandler.value="controller.loadCat("+i+")";
+            li.setAttributeNode(eventHandler);
             ul.appendChild(li);
-            console.log(li);
 
+            /*Consider using on-click attribute instead, this is really inefficent 
             li.addEventListener('click', (function(catCopy) {
+                console.log("Event listener hit");
+                console.log(catCopy);
                 return function() {
                     controller.assignClickedCat(catCopy);
                     console.log(catCopy);
                     createCatEntry.init();
                 };
-            })(cat));
+            })(cat));*/
             
         }
     }
@@ -104,8 +119,7 @@ var createCatEntry = {
         this.img = document.getElementById("img");
         this.count = document.getElementById("count");
         this.clickTarget = document.getElementById("clickTarget");
-        this.clickTarget = document.getElementById("clickTarget");
-        
+
         this.clickTarget.addEventListener('click', function(){
             controller.incrementCounter();
         });
@@ -114,7 +128,8 @@ var createCatEntry = {
     },
     
     render: function() {
-        var clickedCat = controller.assignClickedCat();
+        //var clickedCat = controller.assignClickedCat();//This only works if a paramater is provided, and its used for setting not getting
+        //clicked cat is a global variable no action neccesary here.
         this.name.textContent = clickedCat.name;
         this.img.src = clickedCat.img;
         this.count.textContent = clickedCat.clickCount;

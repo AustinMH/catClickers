@@ -1,6 +1,5 @@
 //Model
-var clickedCat = "";
-
+var clickedCat;
 var model = {
     cats: [
         {
@@ -36,18 +35,18 @@ var model = {
 
 var controller = {
     init: function () {
-        console.log("controller.init();");
         clickedCat = model.cats[0];
-        console.log(clickedCat);
+        console.log('first cat');
+        console.log(clickedCat)
         this.render();
     },
 
     render: function () {
-        console.log("controller.render();!");
         populateList.init();
+        viewCatEntry.init();
     },
 
-    getAllCats: function () {
+    getAllCats: function () {//can call directly with model.cats, it's public
         return model.cats;
     },
 
@@ -57,24 +56,24 @@ var controller = {
         clickedCat = catCopy;
     },*/
     
-    incrementCounter: function () {
+    incrementCounter: function () { 
         console.log("increment counter");
         clickedCat.clickCount++;
+        console.log("clicks at: "+clickedCat.clickCount);
+        document.getElementById("count").textContent = clickedCat.clickCount;
     },
 
     loadCat: function(index){
-        var tempCat=model.cats[index];
-        model.cats[index].clickCount+=1;
-        clickedCat=tempCat;
+        //model.cats[index].clickCount++;
+        clickedCat=model.cats[index];
         console.log(clickedCat.name+" is the clickedCat with count ("+clickedCat.clickCount+")");
-        createCatEntry.init();
+        viewCatEntry.init();
     }
 };
 
 
 
-//View
-
+//View (Creates a list of clickable cat elements)
 var populateList = {
     init: function () {
         this.render();
@@ -92,9 +91,7 @@ var populateList = {
             li = document.createElement("li");
             li.textContent = cat.name;
             li.id = cat.name;
-            var eventHandler = document.createAttribute("onClick");
-            eventHandler.value="controller.loadCat("+i+")";
-            li.setAttributeNode(eventHandler);
+            li.setAttribute("onClick","controller.loadCat("+i+")");
             ul.appendChild(li);
 
             /*Consider using on-click attribute instead, this is really inefficent 
@@ -112,27 +109,24 @@ var populateList = {
     }
 };
 
-
-var createCatEntry = {
+var viewCatEntry = {
     init: function () {
-        this.name = document.getElementById("name");
-        this.img = document.getElementById("img");
-        this.count = document.getElementById("count");
-        this.clickTarget = document.getElementById("clickTarget");
-
-        this.clickTarget.addEventListener('click', function(){
-            controller.incrementCounter();
-        });
-        
-        this.render();
-    },
-    
-    render: function() {
+        //this.name = document.getElementById("name");
+        //this.img = document.getElementById("img");
+        //this.count = document.getElementById("count");
+        //this.clickTarget = document.getElementById("clickTarget");//replaced with inline onclick functions
+        //        this.clickTarget.addEventListener('click', function(){
+        //    controller.incrementCounter();
+        //});
+        //this.render(); //removed so that variables didn't have to be passed as param of set to global code below
         //var clickedCat = controller.assignClickedCat();//This only works if a paramater is provided, and its used for setting not getting
         //clicked cat is a global variable no action neccesary here.
-        this.name.textContent = clickedCat.name;
-        this.img.src = clickedCat.img;
-        this.count.textContent = clickedCat.clickCount;
+
+        console.log("Checking that clicked cat exists still");
+        console.log(clickedCat);
+        document.getElementById("name").textContent = clickedCat.name;
+        document.getElementById("img").src = clickedCat.img;
+        document.getElementById("count").textContent = clickedCat.clickCount;
     }
 };
 

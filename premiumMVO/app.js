@@ -1,6 +1,5 @@
 //Model
-var clickedCat = "";
-
+var clickedCat;
 var model = {
     cats: [
         {
@@ -31,41 +30,52 @@ var model = {
     ]
 };
 
+
 //Controller
 
 var controller = {
     init: function () {
-        console.log("controller.init();");
         clickedCat = model.cats[0];
-        console.log(clickedCat);
+        console.log('first cat');
+        console.log(clickedCat)
         this.render();
     },
 
     render: function () {
-        console.log("controller.render();!");
         populateList.init();
+        viewCatEntry.init();
     },
 
-    getAllCats: function () {
+    getAllCats: function () {//can call directly with model.cats, it's public
         return model.cats;
     },
 
-    assignClickedCat: function(catCopy) {
+    //assign directly instead, so the models stay bound
+    /*assignClickedCat: function(catCopy) {
+        
         clickedCat = catCopy;
-    },
+    },*/
     
-    incrementCounter: function () {
+    incrementCounter: function () { 
         console.log("increment counter");
+        clickedCat.clickCount++;
+        console.log("clicks at: "+clickedCat.clickCount);
+        document.getElementById("count").textContent = clickedCat.clickCount;
+    },
+
+    loadCat: function(index){
+        //model.cats[index].clickCount++;
+        clickedCat=model.cats[index];
+        console.log(clickedCat.name+" is the clickedCat with count ("+clickedCat.clickCount+")");
+        viewCatEntry.init();
     }
 };
 
 
 
-//View
-
+//View (Creates a list of clickable cat elements)
 var populateList = {
     init: function () {
-        console.log("populateList.init();");
         this.render();
     },
 
@@ -75,49 +85,48 @@ var populateList = {
         var li = "";
         var ul = document.getElementById("catUL");
         var allCats = controller.getAllCats();
-        console.log(allCats);
 
         for (i = 0; i < allCats.length; i++) {
             cat = allCats[i];
             li = document.createElement("li");
             li.textContent = cat.name;
             li.id = cat.name;
+            li.setAttribute("onClick","controller.loadCat("+i+")");
             ul.appendChild(li);
-            console.log(li);
 
+            /*Consider using on-click attribute instead, this is really inefficent 
             li.addEventListener('click', (function(catCopy) {
+                console.log("Event listener hit");
+                console.log(catCopy);
                 return function() {
                     controller.assignClickedCat(catCopy);
                     console.log(catCopy);
                     createCatEntry.init();
                 };
-            })(cat));
+            })(cat));*/
             
         }
     }
 };
 
-
-var createCatEntry = {
+var viewCatEntry = {
     init: function () {
-        this.name = document.getElementById("name");
-        this.img = document.getElementById("img");
-        this.count = document.getElementById("count");
-        this.clickTarget = document.getElementById("clickTarget");
-        this.clickTarget = document.getElementById("clickTarget");
-        
-        this.clickTarget.addEventListener('click', function(){
-            controller.incrementCounter();
-        });
-        
-        this.render();
-    },
-    
-    render: function() {
-        var clickedCat = controller.assignClickedCat();
-        this.name.textContent = clickedCat.name;
-        this.img.src = clickedCat.img;
-        this.count.textContent = clickedCat.clickCount;
+        //this.name = document.getElementById("name");
+        //this.img = document.getElementById("img");
+        //this.count = document.getElementById("count");
+        //this.clickTarget = document.getElementById("clickTarget");//replaced with inline onclick functions
+        //        this.clickTarget.addEventListener('click', function(){
+        //    controller.incrementCounter();
+        //});
+        //this.render(); //removed so that variables didn't have to be passed as param of set to global code below
+        //var clickedCat = controller.assignClickedCat();//This only works if a paramater is provided, and its used for setting not getting
+        //clicked cat is a global variable no action neccesary here.
+
+        console.log("Checking that clicked cat exists still");
+        console.log(clickedCat);
+        document.getElementById("name").textContent = clickedCat.name;
+        document.getElementById("img").src = clickedCat.img;
+        document.getElementById("count").textContent = clickedCat.clickCount;
     }
 };
 

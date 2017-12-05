@@ -26,9 +26,9 @@
             color: #b2b2b2;
         }
 
-        #clickTarget {
+        /*#clickTarget { why hide this?
             display: none;
-        }
+        }*/
 
         #clickTarget2 {
             display: none;
